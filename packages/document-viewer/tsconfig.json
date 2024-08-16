@@ -1,13 +1,13 @@
 {
   "include": ["src", "types", "test"],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
-    "rootDir": "./src",
+    "rootDir": ".",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -26,6 +26,6 @@
       "*": ["src/*", "node_modules/*"]
     },
     "jsx": "react",
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }
 }
