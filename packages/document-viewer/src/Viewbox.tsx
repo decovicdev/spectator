@@ -191,6 +191,19 @@ const selectionToRectangles = (selection: PageSelection, tokens: Token[] | null)
   return tokensToRectangles(selectedTokens);
 };
 
+const selectionToTokens = (selection: PageSelection, tokens: Token[] | null): Token[] => {
+  if (!selection || !tokens) return [];
+
+  const startIndex = selection.indexStart === Number.NEGATIVE_INFINITY ? 0 : selection.indexStart;
+
+  const endIndex =
+    selection.indexEnd === Number.POSITIVE_INFINITY ? tokens.length - 1 : selection.indexEnd;
+
+  const selectedTokens = tokens.slice(startIndex, endIndex + 1);
+
+  return selectedTokens;
+};
+
 enum SelectionInPage {
   Start,
   End,
@@ -491,6 +504,26 @@ const Viewbox = (props: ViewboxrProps): JSX.Element => {
     <Paper
       ref={pageImageWrapperRef}
       sx={{ position: "relative", flex: "1 1 auto", cursor: "text" }}
+      onCopy={event => {
+        const selectionTokens = selectionToTokens(selection, tokens);
+
+        const text = selectionTokens.reduce((acc, token, i, arr) => {
+          const prevLine = i > 0 && arr[i - 1].line;
+
+          if (prevLine && token.line > prevLine) {
+            const lines = token.line - prevLine;
+
+            for (let j = 0; j < lines; j += 1) {
+              acc += "\n";
+            }
+          }
+
+          return `${acc} ${token.characters}`;
+        }, "");
+
+        event.clipboardData?.setData("text/plain", text.trimStart());
+        event.preventDefault();
+      }}
     >
       {imageSrc && (
         <img
