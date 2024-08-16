@@ -7,14 +7,16 @@
       "word": 0,
       "boundingBox": { "top": 305, "bottom": 338, "left": 300, "right": 415 },
       "characterStart": 19,
-      "characterEnd": 24
+      "characterEnd": 24,
+      "characters": "Three"
     },
     {
       "line": 0,
       "word": 1,
       "boundingBox": { "top": 305, "bottom": 338, "left": 428, "right": 553 },
       "characterStart": 25,
-      "characterEnd": 30
+      "characterEnd": 30,
+      "characters": "words"
     }
   ]
 }
