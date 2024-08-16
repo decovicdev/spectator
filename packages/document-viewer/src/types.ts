@@ -22,6 +22,7 @@ export type Token = {
   boundingBox: BoundingBox;
   characterStart: number;
   characterEnd: number;
+  characters: string;
 };
 
 export type MousePosition = [number, number] | null; // [x, y] | null
